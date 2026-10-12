@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fffafc">
+  <title>Love in frame ♡</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="loading-screen" id="loadingScreen" aria-label="Memuat kenangan">
+    <div class="loading-paper">
+      <div class="loading-stamp">♡</div>
+      <p class="loading-title">Love in frame</p>
+      <p class="loading-subtitle">memuat kenangan...</p>
+      <div class="progress-track"><span id="progressBar"></span></div>
+      <span class="loading-percent" id="loadingPercent">0%</span>
+    </div>
+    <span class="loading-sparkle sparkle-one">✧</span>
+    <span class="loading-sparkle sparkle-two">♡</span>
+    <span class="loading-sparkle sparkle-three">✿</span>
+  </div>
+
+  <main class="page">
+    <header class="album-header">
+      <div class="postmark" aria-hidden="true"><span>MADE WITH</span><b>♡</b><span>LOVE</span></div>
+      <p class="eyebrow">A LITTLE COLLECTION OF US</p>
+      <h1>Love <span>in frame</span><i>♡</i></h1>
+      <p class="location-subtitle">Cisoka Eco Green Park Photo</p>
+      <p class="date">16 Agustus 2026</p>
+      <div class="intro-note">klik setiap stamp untuk membuka kenangan kita ♡</div>
+      <div class="album-controls" aria-label="Kontrol album">
+        <button type="button" class="control-button" id="toggleAllButton" aria-pressed="false">♡ Buka semua foto</button>
+        <button type="button" class="control-button music-button" id="musicButton" aria-pressed="false">♫ About You - The 1975</button>
+      </div>
+    </header>
+    <audio id="backgroundMusic" src="musik.mp3" loop preload="none"></audio>
+
+    <section class="stamp-grid" id="stampGrid" aria-label="Album berisi 20 stamp"></section>
+
+    <footer class="album-footer">
+      <span class="tiny-heart">♡</span>
+      <p>a little piece of us <span>♡</span></p>
+      <small>Ganyuu ♡ Didunn</small>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

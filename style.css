@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
+:root {
+  --paper: #fffdfd;
+  --pink: #f5dce5;
+  --pink-deep: #d99ab3;
+  --pink-soft: #fff1f5;
+  --ink: #65535a;
+  --muted: #a38d95;
+  --shadow: 0 8px 22px rgba(151, 104, 123, .10);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 10% 8%, rgba(248, 221, 232, .42), transparent 23rem),
+    radial-gradient(circle at 90% 42%, rgba(255, 239, 245, .8), transparent 22rem),
+    #fffdfd;
+  font-family: 'DM Sans', sans-serif;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .18;
+  background-image: radial-gradient(#e8cbd6 .65px, transparent .65px);
+  background-size: 9px 9px;
+  z-index: -1;
+}
+.page { width: min(100%, 760px); margin: 0 auto; padding: 30px 17px 42px; }
+.album-header { position: relative; text-align: center; padding: 22px 10px 25px; }
+.eyebrow { margin: 0 0 10px; color: #bd8da1; font-size: .65rem; letter-spacing: .22em; font-weight: 700; }
+h1 {
+  margin: 0;
+  font: 600 clamp(2.15rem, 8vw, 3.3rem)/1.05 'Playfair Display', serif;
+  letter-spacing: -.045em;
+  color: #6d5660;
+}
+h1 span { color: #d69bb2; }
+h1 i { display: inline-block; margin-left: 3px; color: #d99ab3; font: normal .6em 'DM Sans', sans-serif; transform: rotate(10deg); }
+.date { margin: 12px 0 17px; color: #a98b96; font-size: .85rem; letter-spacing: .13em; }
+.intro-note {
+  display: inline-block; padding: 10px 17px; max-width: 100%;
+  background: #fff4f7; border: 1px dashed #e9c5d3; border-radius: 5px;
+  color: #9b7585; font-size: .78rem; transform: rotate(-.7deg);
+}
+.postmark {
+  position: absolute; right: 2px; top: 0; width: 57px; height: 57px; border: 1px solid #e4bdcd;
+  border-radius: 50%; color: #d19ab0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  font-size: .42rem; letter-spacing: .08em; transform: rotate(12deg); opacity: .8;
+}
+.postmark b { font-size: 1.2rem; line-height: 1.25; }
+.stamp-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 13px 10px; perspective: 1200px; }
+.stamp-card {
+  position: relative; aspect-ratio: 3 / 4; min-width: 0; border: 0; padding: 0;
+  background: transparent; cursor: pointer; perspective: 900px; -webkit-tap-highlight-color: transparent;
+}
+.stamp-card.landscape { aspect-ratio: 4 / 3; align-self: center; }
+.stamp-inner {
+  position: absolute; inset: 0; transform-style: preserve-3d; -webkit-transform-style: preserve-3d;
+  transform-origin: center center;
+  transition: transform .72s cubic-bezier(.2,.72,.25,1);
+  will-change: transform;
+}
+.stamp-card.is-flipped .stamp-inner { transform: rotateY(180deg); }
+.stamp-face {
+  position: absolute; inset: 0; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  border: 5px solid #fff; outline: 1px solid #f0dce4; box-shadow: var(--shadow);
+  background: #fff7fa;
+}
+.stamp-front {
+  display: flex; align-items: center; justify-content: center; flex-direction: column;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.9), rgba(255,240,246,.86)),
+    repeating-linear-gradient(45deg, transparent 0 7px, rgba(228,174,194,.13) 7px 8px);
+}
+.stamp-front::before {
+  content: ""; position: absolute; inset: 4px; border: 1px dashed #e7bdcd; pointer-events: none;
+}
+.stamp-front::after {
+  content: "♡"; position: absolute; top: 7px; right: 9px; font-size: .8rem; color: #d9a0b5; opacity: .85;
+}
+.stamp-number { position: absolute; top: 8px; left: 9px; font-size: .62rem; color: #b98b9d; font-weight: 700; }
+.stamp-icon { font-size: clamp(1.45rem, 6vw, 2.4rem); color: #d99ab3; line-height: 1; filter: drop-shadow(0 2px 0 white); }
+.stamp-word { margin-top: 10px; color: #b18496; font-family: 'Playfair Display', serif; font-size: clamp(.55rem, 2.5vw, .78rem); font-style: italic; }
+.stamp-cancel {
+  position: absolute; bottom: 9px; left: 0; right: 0; text-align: center; color: #e2b9c9; font-size: .55rem; letter-spacing: .12em;
+}
+.stamp-back { transform: rotateY(180deg) translateZ(1px); -webkit-transform: rotateY(180deg) translateZ(1px); background: white; padding: 4px; }
+.stamp-back img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.stamp-back .photo-placeholder {
+  width: 100%; height: 100%; display: flex; flex-direction: column; gap: 7px; align-items: center; justify-content: center;
+  background: linear-gradient(145deg, #fff4f7, #f7e2ea); color: #a8788d; text-align: center; padding: 6px;
+}
+.photo-placeholder b { font: 600 .9rem 'Playfair Display', serif; }
+.photo-placeholder small { font-size: .58rem; line-height: 1.4; }
+.stamp-card:focus-visible { outline: 2px solid #d99ab3; outline-offset: 4px; border-radius: 3px; }
+.stamp-card:hover { z-index: 2; }
+.stamp-card:hover { filter: drop-shadow(0 5px 6px rgba(151,104,123,.10)); }
+.stamp-card.is-flipped .stamp-face { outline-color: #e5b7c9; }
+.album-footer { text-align: center; padding: 35px 0 5px; }
+.tiny-heart { display: inline-flex; width: 28px; height: 28px; align-items: center; justify-content: center; border: 1px solid #e6bdcc; border-radius: 50%; color: #d59ab0; }
+.album-footer p { margin: 10px 0 5px; font: italic 1.25rem 'Playfair Display', serif; color: #b77f96; }
+.album-footer p span { color: #d99ab3; }
+.album-footer small { color: #b49da5; font-size: .68rem; }
+.loading-screen {
+  position: fixed; inset: 0; z-index: 20; display: grid; place-items: center; overflow: hidden;
+  background: #fffdfd; transition: opacity .7s ease, visibility .7s ease;
+}
+.loading-screen.hide { opacity: 0; visibility: hidden; }
+.loading-paper { width: min(80%, 310px); text-align: center; padding: 35px 25px; background: #fff8fa; border: 1px solid #f0dce4; box-shadow: 0 10px 35px rgba(151,104,123,.08); transform: rotate(-1deg); }
+.loading-stamp { width: 76px; height: 88px; margin: 0 auto 20px; display: grid; place-items: center; background: #f8e5ec; border: 5px solid white; outline: 1px dashed #dfaabd; color: #d392ac; font-size: 2.2rem; animation: stampFloat 2s ease-in-out infinite; }
+.loading-title { margin: 0; font: 600 1.7rem 'Playfair Display', serif; color: #6d5660; }
+.loading-subtitle { margin: 10px 0 15px; color: #b18496; font-size: .8rem; letter-spacing: .05em; }
+.progress-track { height: 5px; border-radius: 99px; background: #f0dce4; overflow: hidden; }
+.progress-track span { display: block; height: 100%; width: 0; background: #d99ab3; border-radius: inherit; transition: width .1s linear; }
+.loading-percent { display: block; margin-top: 8px; color: #b18496; font-size: .7rem; }
+.loading-sparkle { position: absolute; color: #e0a9bd; animation: float 4s ease-in-out infinite; }
+.sparkle-one { top: 17%; left: 15%; font-size: 2rem; }
+.sparkle-two { top: 27%; right: 13%; font-size: 1.7rem; animation-delay: -.8s; }
+.sparkle-three { bottom: 18%; left: 18%; font-size: 1.8rem; animation-delay: -1.4s; }
+@keyframes stampFloat { 0%,100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-7px) rotate(3deg); } }
+@keyframes float { 0%,100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-12px) rotate(12deg); } }
+@media (min-width: 600px) {
+  .page { padding: 38px 30px 50px; }
+  .stamp-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 17px 14px; }
+  .stamp-card.landscape { width: 100%; }
+  .album-header { padding-bottom: 30px; }
+}
+@media (max-width: 360px) {
+  .page { padding: 20px 11px 30px; }
+  .stamp-grid { gap: 10px 7px; }
+  .stamp-face { border-width: 4px; }
+  .stamp-icon { font-size: 1.35rem; }
+  .postmark { width: 43px; height: 43px; right: 0; }
+  .postmark span { font-size: .32rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
+
+/* Flip compatibility: backface is hidden on each face only, not on the clickable card */
+.stamp-face { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.stamp-front { transform: rotateY(0deg) translateZ(1px); }
+.stamp-back { transform: rotateY(180deg) translateZ(1px); -webkit-transform: rotateY(180deg) translateZ(1px); }
+.stamp-back img { display: block; position: relative; z-index: 1; }
+
+/* Subtitle for the Love in frame album */
+.location-subtitle {
+  margin: 9px 0 0;
+  color: #a8798c;
+  font-size: clamp(.76rem, 3vw, .95rem);
+  letter-spacing: .035em;
+  font-weight: 500;
+}
+
+
+/* Tombol kontrol album */
+.album-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 9px;
+  margin: 16px auto 0;
+}
+.control-button {
+  appearance: none;
+  border: 1px solid #e7bfd0;
+  border-radius: 999px;
+  padding: 10px 15px;
+  color: #986e80;
+  background: linear-gradient(135deg, #fff8fa, #fceaf1);
+  box-shadow: 0 4px 12px rgba(151, 104, 123, .09);
+  font: 600 .78rem 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: transform .2s ease, background .2s ease, opacity .2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.control-button:hover { transform: translateY(-2px); background: #f9e4ed; }
+.control-button:active { transform: scale(.97); }
+.control-button:disabled { opacity: .65; cursor: wait; transform: none; }
+.control-button:focus-visible { outline: 2px solid #d99ab3; outline-offset: 3px; }
+@media (max-width: 360px) {
+  .control-button { padding: 9px 11px; font-size: .72rem; }
+}
